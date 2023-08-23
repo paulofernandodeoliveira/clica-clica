@@ -1,88 +1,26 @@
-import tkinter as tk
-from tkinter import ttk
-import pyautogui
-import threading
-from tkinter import messagebox
+CLICA-CLICA App
+Descrição
+O CLICA-CLICA App é uma aplicação Python desenvolvida usando a biblioteca Tkinter. Essa aplicação permite automatizar ações específicas usando a biblioteca PyAutoGUI. A interface inclui abas para controlar diferentes automações em diferentes contextos, além de um botão de ajuda para fornecer informações aos usuários.
 
-class MainWindow(tk.Tk):
-    def __init__(self):
-        super().__init__()
-        self.title("CLICA-CLICA")
-        self.geometry('{}x{}'.format(self.winfo_screenwidth(), self.winfo_screenheight()))
+Recursos
+Interface gráfica amigável usando Tkinter.
+Abas separadas para Dental Cremer (DC) e Dental Speedy (DS).
+Botões "Iniciar Automação" e "Parar Automação" para ambas as abas.
+Botão "Ajuda" para fornecer informações aos usuários.
+Automatização de ações específicas usando PyAutoGUI.
+Instruções de Uso
+Clone o repositório para sua máquina local.
+Certifique-se de ter as bibliotecas Tkinter e PyAutoGUI instaladas.
+Execute o arquivo clica_clica.py para iniciar o aplicativo.
+Escolha a aba correspondente à sua automação (DC ou DS).
+Clique no botão "Iniciar Automação" para começar a automatização.
+Clique no botão "Parar Automação" para interromper a automatização.
+Clique no botão "Ajuda" para obter informações adicionais.
+Contribuição
+Sinta-se à vontade para fazer fork deste repositório, adicionar recursos ou corrigir problemas. Contribuições são bem-vindas!
 
-        self.style = ttk.Style()
-        self.style.configure("TButton", padding=6, relief="flat", background="#3498db")
-        self.style.map("TButton", background=[("active", "#2980b9")])
+Aviso Legal
+Este aplicativo é fornecido como está, sem garantias expressas ou implícitas. Use por sua conta e risco.
 
-        self.tab_control = ttk.Notebook(self)
-        self.tab_cremer = ttk.Frame(self.tab_control)
-        self.tab_speedy = ttk.Frame(self.tab_control)
-
-        self.tab_control.add(self.tab_cremer, text="Dental Cremer")
-        self.tab_control.add(self.tab_speedy, text="Dental Speedy")
-
-        self.tab_control.pack(expand=1, fill="both")
-
-        self.create_cremer_tab()
-        self.create_speedy_tab()
-
-        self.loop_cremer_rodando = False
-        self.loop_speedy_rodando = False
-
-        self.create_help_button()
-
-    def create_cremer_tab(self):
-        frame_cremer = ttk.LabelFrame(self.tab_cremer, text="Aba Dental Cremer")
-        frame_cremer.pack(padx=20, pady=20)
-
-        self.botao_iniciar_cremer = ttk.Button(frame_cremer, text="Iniciar Automação Dental Cremer", command=self.iniciar_automacao_cremer)
-        self.botao_iniciar_cremer.pack(padx=20, pady=5)
-
-        self.botao_parar_cremer = ttk.Button(frame_cremer, text="Parar Automação Dental Cremer", command=self.parar_automacao_cremer)
-        self.botao_parar_cremer.pack(padx=20, pady=5)
-
-    def create_speedy_tab(self):
-        frame_speedy = ttk.LabelFrame(self.tab_speedy, text="Aba Dental Speedy")
-        frame_speedy.pack(padx=20, pady=20)
-
-        self.botao_iniciar_speedy = ttk.Button(frame_speedy, text="Iniciar Automação Dental Speedy", command=self.iniciar_automacao_speedy)
-        self.botao_iniciar_speedy.pack(padx=20, pady=5)
-
-        self.botao_parar_speedy = ttk.Button(frame_speedy, text="Parar Automação Dental Speedy", command=self.parar_automacao_speedy)
-        self.botao_parar_speedy.pack(padx=20, pady=5)
-
-    def rodar_loop_cremer(self):
-        while self.loop_cremer_rodando:
-            pyautogui.PAUSE = 5
-            # Coloque aqui as ações específicas para a automação na aba Dental Cremer
-
-    def rodar_loop_speedy(self):
-        while self.loop_speedy_rodando:
-            pyautogui.PAUSE = 5
-            # Coloque aqui as ações específicas para a automação na aba Dental Speedy
-
-    def iniciar_automacao_cremer(self):
-        self.loop_cremer_rodando = True
-        threading.Thread(target=self.rodar_loop_cremer).start()
-
-    def parar_automacao_cremer(self):
-        self.loop_cremer_rodando = False
-
-    def iniciar_automacao_speedy(self):
-        self.loop_speedy_rodando = True
-        threading.Thread(target=self.rodar_loop_speedy).start()
-
-    def parar_automacao_speedy(self):
-        self.loop_speedy_rodando = False
-
-    def create_help_button(self):
-        help_button = ttk.Button(self, text="Help", command=self.show_help)
-        help_button.place(relx=1, rely=1, anchor="se", x=-10, y=-10)
-
-    def show_help(self):
-        help_text = "a ordem deve ser navegador -> speedy -> speedy remoto."
-        messagebox.showinfo("Ajuda", help_text)
-
-if __name__ == "__main__":
-    app = MainWindow()
-    app.mainloop()
+Contato
+Se você tiver alguma dúvida ou precisar de assistência, entre em contato com Paulo em paulof.oliveira00@gmail.com.
